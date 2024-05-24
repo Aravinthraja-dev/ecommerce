@@ -1,0 +1,21 @@
+*{
+    font-family: Helvetica;
+}
+div strong p{
+    text-transform: uppercase;
+    font-size: small;
+    color: #0080FF;
+}
+div h3{
+    text-transform: uppercase;
+    font-size: 28px;
+    font-weight: bold;
+    color:#FF7F00;
+}
+div .price{
+    font-size: 25px;
+    color: #0080FF;
+}
+div .rating{
+    color: #0080FF;
+}

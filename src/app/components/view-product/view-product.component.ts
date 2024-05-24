@@ -13,6 +13,8 @@ import { CommonModule } from '@angular/common';
 })
 export class ViewProductComponent {
   products!: ProductDetails;
+  buttonText: string = 'Add to Cart';
+  isAdded: boolean = false;
 
   constructor(private route: ActivatedRoute, private productService: ProductService) { }
   id: number = this.route.snapshot.params['id'];
@@ -29,6 +31,8 @@ export class ViewProductComponent {
 
   addToCart(product: ProductDetails) {
     this.productService.addToCart(product);
+    this.buttonText = 'Added';
+    this.isAdded = true;
   }
 
 }

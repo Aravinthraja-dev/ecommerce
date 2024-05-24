@@ -4,16 +4,17 @@
     <div class="col-md-9">
         <div *ngIf="products" class="row g-0 border rounded overflow-hidden flex-md-row mb-4 shadow-sm h-md-250 position-relative">
             <div class="col-auto d-none d-lg-block">
-                <img [src]="products.image" alt="{{ products.title }}" />
+                <img [src]="products.image" alt="{{ products.title }}" height="450" width="350">
             </div>
             <div class="col p-4 d-flex flex-column position-static">
-            <strong class="d-inline-block mb-2 text-primary">
-                {{ products.title }}
-            </strong>
-            <h3 class="mb-0">Price: {{ products.price | currency }}</h3>
-            <div class="mb-1 text-muted">Nov 12</div>
-            <p class="card-text mb-auto">{{ products.description }}</p>
-            <button class="stretched-link btn btn-primary" (click)="addToCart(products)">Add to Cart</button>
+                <strong class="d-inline-block mb-2 text-primary">
+                    <p>{{ products.category }}</p>
+                </strong>
+                <h3 class="mb-0">{{ products.title }}</h3>
+                <p class="mb-1 price">Price: {{ products.price | currency:"INR":"symbol" }}</p>
+                <p class="card-text mb-auto description">{{ products.description }}</p>
+                <p class="card-text"><span class="rating">Rating:</span> {{ products.rating.rate+"/5" }}<small class="text-muted">{{ "("+products.rating.count+")" }}</small></p>
+                <button class="stretched-link btn btn-primary" (click)="addToCart(products)" [disabled]="isAdded">{{ buttonText }}</button>
             </div>
         </div>
     </div>

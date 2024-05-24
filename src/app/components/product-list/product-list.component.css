@@ -1,14 +1,52 @@
 .card{
-    height: 430px;
+    height: 380px;
     padding: 20px;
     margin: 50px;
     border-radius: 2px;
     box-shadow: 0 19px 38px rgba(0,0,0,0.30), 0 15px 12px rgba(0,0,0,0.22);
 }
-.card img{
-    height: 150px;
-    width: 70px;
+.card .card-img img{
+    height: 180px;
+    width: 90px;  
 }
 .card .card-body h4{
   cursor: pointer;
+  color: black;
+  text-transform: capitalize;
+  font-size: 20px;
+  width: 260px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.card .card-body .price{
+  color: black;
+  font-size: 20px;
+}
+.card .card-body .price .offer{
+  color: green;
+  font-size: 15px;
+  padding-left: 10px;
+}
+.card .card-body .deal{
+  color: green;
+  font-weight: bold;
+  background-color: rgba(178, 234, 178, 0.478);
+  width: 70px;
+}
+.card .category{
+  text-transform: uppercase;
+  color: #FF7F00;
+  font-size: 15px;
+  line-height: 0;
+}
+.container .list-group{
+  padding-top: 40px;
+}
+.container .list-group .list-group-item{
+  text-align: center;
+  text-transform: uppercase;
+  padding: 15px 0;
+  border: none;
+  overflow: hidden;
 }

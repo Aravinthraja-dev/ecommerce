@@ -20,15 +20,13 @@ export class ProductListComponent {
   category!: string | null;
   currentRating!: number;
 
-  constructor(private productService: ProductService, private router: ActivatedRoute, private route: Router) { }
+  constructor(private productService: ProductService, private router: ActivatedRoute) { }
 
   ngOnInit(): void {
     this.productService.getAllProducts('jewelery').pipe(
       switchMap(product => {
         this.products = product;
         this.filteredProduct = product;
-        this.productService.setProducts(this.products);
-        this.productService.setFilteredProducts(this.filteredProduct);
         return this.router.queryParamMap;
       })
     ).subscribe(params => {
@@ -36,9 +34,12 @@ export class ProductListComponent {
       this.filteredProduct = this.category ? 
         this.products.filter(p => p.category === this.category) : 
         this.products;
-      this.productService.setFilteredProducts(this.filteredProduct);
     });
     this.getAllCategories();
+
+    this.productService.searchObservable$.subscribe(query => {
+      this.onSearch(query);
+    });
   }
 
   getAllCategories():void{
@@ -47,5 +48,8 @@ export class ProductListComponent {
         this.categories = data;
       }
     )
+  }
+  onSearch(query: string): void {
+    this.filteredProduct = this.products.filter(p => p.title.toLowerCase().includes(query.toLowerCase()));
   }
 }

@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Categories, ProductDetails } from '../models/product-details';
-import { BehaviorSubject, Observable } from 'rxjs';
+import { BehaviorSubject, Observable, Subject } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 
 @Injectable({
@@ -9,11 +9,10 @@ import { HttpClient } from '@angular/common/http';
 export class ProductService {
   private baseURL = 'https://fakestoreapi.com/products';
   private categoryURL = 'https://fakestoreapi.com/products/categories';
-  private products: ProductDetails[] = [];
-  private filteredProducts: ProductDetails[] = [];
   private cart: ProductDetails[] = [];
   private cartCount = new BehaviorSubject<number>(0);
-
+  private searchSubject = new Subject<string>();
+  searchObservable$ = this.searchSubject.asObservable();
 
   constructor(private http: HttpClient) { }
 
@@ -28,21 +27,6 @@ export class ProductService {
   getProductById(id: number): Observable<any> {
     return this.http.get<ProductDetails[]>(`${this.baseURL}/${id}`);
   }
-  public setProducts(products: ProductDetails[]): void {
-    this.products = products;
-  }
-
-  public setFilteredProducts(filteredProducts: ProductDetails[]): void {
-    this.filteredProducts = filteredProducts;
-  }
-
-  public getProducts(): ProductDetails[] {
-    return this.products;
-  }
-
-  public getFilteredProducts(): ProductDetails[] {
-    return this.filteredProducts;
-  }
 
   addToCart(product: ProductDetails) {
     this.cart.push(product);
@@ -51,5 +35,9 @@ export class ProductService {
 
   getCartCount():  Observable<number> {
     return this.cartCount.asObservable();
-  }  
+  } 
+
+  emitSearch(query: string): void {
+    this.searchSubject.next(query);
+  }
 }
