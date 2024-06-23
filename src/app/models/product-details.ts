@@ -1,8 +1,3 @@
-export interface SlideInterface {
-    url: string;
-    title: string;
-}
-
 export interface ProductDetails{
     id:string;
     title: string;
