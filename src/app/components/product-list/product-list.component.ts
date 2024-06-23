@@ -23,7 +23,7 @@ export class ProductListComponent {
   constructor(private productService: ProductService, private router: ActivatedRoute) { }
 
   ngOnInit(): void {
-    this.productService.getAllProducts('jewelery').pipe(
+    this.productService.getAllProducts().pipe(
       switchMap(product => {
         this.products = product;
         this.filteredProduct = product;
